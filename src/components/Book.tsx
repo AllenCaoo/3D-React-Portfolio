@@ -6,25 +6,19 @@ import '../index.css'
 
 
 
-const Bookshelf = ({
+const Book = ({
     position,
 }: {
     position: [number, number, number];
 }) => {
   return (
         <>
-          <ambientLight intensity={1} />
-          <OrbitControls enableZoom={true} />
-            <mesh position={position}>
-              <boxGeometry args={[1.8, 0.1, 6]}/>
-              <meshBasicMaterial/>
-              <mesh>
-                <boxGeometry/>
-                <meshNormalMaterial/>
-              </mesh>
-            </mesh>
+          <mesh position={position} receiveShadow={true}>
+            <boxGeometry args={[0.3, 2.5, 1.8]}/>
+            <meshNormalMaterial/>
+          </mesh>
         </>
   );
 }
 
-export default Bookshelf
+export default Book

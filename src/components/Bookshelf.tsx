@@ -3,6 +3,7 @@ import { Canvas } from '@react-three/fiber'
 import { OrbitControls, ScrollControls } from "@react-three/drei";
 
 import '../index.css'
+import Book from './Book';
 
 
 
@@ -13,15 +14,10 @@ const Bookshelf = ({
 }) => {
   return (
         <>
-          <ambientLight intensity={1} />
-          <OrbitControls enableZoom={true} />
             <mesh position={position}>
-              <boxGeometry args={[1.8, 0.1, 6]}/>
+              <boxGeometry args={[6, 0.1, 1.8]}/>
               <meshBasicMaterial/>
-              <mesh>
-                <boxGeometry/>
-                <meshNormalMaterial/>
-              </mesh>
+              <Book position={[position[0], position[1] + 2.5/2 + 0.05, position[2]]}/>
             </mesh>
         </>
   );

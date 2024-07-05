@@ -5,13 +5,13 @@ import { OrbitControls, ScrollControls } from "@react-three/drei";
 
 import './App.css'
 import Bookshelf from './components/Bookshelf';
+import Room from './components/Room';
 
 function App() {
   return (
       <Canvas 
         camera={{
-          position: [0, 0, 8],
-          fov: 75,
+          position: [0, 15, 1],
           near: 0.1,
         }}
         >
@@ -20,7 +20,7 @@ function App() {
           <ambientLight intensity={1} />
           <OrbitControls enableZoom={true} />
           <ScrollControls pages={3} damping={0.25}>
-            <Bookshelf position={[0,0,0]}/>
+            <Room position={[0,0,0]}/>
           </ScrollControls>
         </>
       </Canvas>
