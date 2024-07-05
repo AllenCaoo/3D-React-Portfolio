@@ -1,10 +1,8 @@
-import { useState } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls, ScrollControls } from "@react-three/drei";
 
 
 import './App.css'
-import Bookshelf from './components/Bookshelf';
 import Room from './components/Room';
 
 function App() {

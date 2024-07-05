@@ -1,7 +1,3 @@
-import { useState } from 'react'
-import { Canvas } from '@react-three/fiber'
-import { OrbitControls, ScrollControls } from "@react-three/drei";
-
 import '../index.css'
 import Book from './Book';
 
