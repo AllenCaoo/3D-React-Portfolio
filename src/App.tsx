@@ -13,7 +13,6 @@ function App() {
           near: 0.1,
         }}
         >
-        {/* <color attach="background" args={["#ececec"]} /> */}
         <>
           <ambientLight intensity={1} />
           <OrbitControls enableZoom={true} />
