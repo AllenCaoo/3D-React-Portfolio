@@ -6,10 +6,15 @@ import './App.css'
 import Room from './components/Room';
 
 function App() {
+
+  // useThree(({ camera }) => {
+  //   camera.rotation.set(1, 0, 0);
+  // });
+
   return (
       <Canvas 
         camera={{
-          position: [0, 15, 1],
+          position: [1, 15, 3],
           near: 0.1,
         }}
         >

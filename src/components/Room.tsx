@@ -15,10 +15,10 @@ const Room = ({
             <directionalLight color={0xffffff} intensity={0.3} position={[0, 15, 0]} castShadow={true} />
 
 
-            <mesh position={[position[0], position[1] - 6, position[1]]} receiveShadow={true}>
+            {/* <mesh position={[position[0], position[1] - 6, position[1]]} receiveShadow={true}>
               <boxGeometry args={[25, 0.1, 30]}/>
               <meshStandardMaterial/>
-            </mesh>
+            </mesh> */}
 
 
             <Wall position={[position[0], position[1] - 6, position[1]]} dimensions={[25, 0.1, 30]}/>  {/* ground */}
@@ -28,7 +28,7 @@ const Room = ({
             <Wall position={[position[0]-25/2, position[1] - 11 + 30/2, position[1]]} dimensions={[0.1, 20, 30]}/>
 
 
-            <Bookshelf position={[position[0], position[1], position[2]]}/>
+            <Bookshelf position={[position[0], position[1], position[2] - 5]}/>
 
 
 
