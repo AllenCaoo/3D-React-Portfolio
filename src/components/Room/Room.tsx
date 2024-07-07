@@ -1,5 +1,5 @@
-import '../index.css'
-import Bookshelf from './Bookshelf';
+import '../../index.css'
+import Bookshelf from '../Bookshelf/Bookshelf';
 import Wall from './Wall';
 
 
@@ -28,7 +28,7 @@ const Room = ({
             <Wall position={[position[0]-25/2, position[1] - 11 + 30/2, position[1]]} dimensions={[0.1, 20, 30]}/>
 
 
-            <Bookshelf position={[position[0], position[1], position[2] - 5]}/>
+            <Bookshelf position={[position[0], position[1], position[2] - 13.5]}/>
 
 
 

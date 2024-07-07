@@ -3,7 +3,7 @@ import { OrbitControls, ScrollControls } from "@react-three/drei";
 
 
 import './App.css'
-import Room from './components/Room';
+import Room from './components/Room/Room';
 
 function App() {
 
