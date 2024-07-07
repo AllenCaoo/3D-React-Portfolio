@@ -1,5 +1,4 @@
 import '../../index.css'
-import Book from './Book';
 import Books from './Books';
 
 
