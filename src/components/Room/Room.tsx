@@ -1,7 +1,9 @@
 import '../../index.css'
 import Bookshelf from '../Bookshelf/Bookshelf';
+import CoffeeTable from '../CoffeeTable/CoffeeTable';
+import AcousticGuitar from '../Guitar/AcousticGuitar';
+import L_Couch from '../L_Couch/L_Couch';
 import Wall from './Wall';
-import { useFBX, useGLTF } from '@react-three/drei';
 
 
 
@@ -10,11 +12,6 @@ const Room = ({
 }: {
     position: [number, number, number];
 }) => {
-
-  const L_couch = useFBX('models/L_couch.fbx');
-
-  let { scene } = useGLTF('models/coffee_table.glb');
-  const coffeeTable = scene;
 
   return (
         <>
@@ -34,8 +31,9 @@ const Room = ({
             <Wall position={[position[0], position[1] - 11 + 30/2, position[1] - 30/2]} dimensions={[25, 20, 0.1]}/>
             <Wall position={[position[0]-25/2, position[1] - 11 + 30/2, position[1]]} dimensions={[0.1, 20, 30]}/>
 
-            <primitive object={L_couch} scale={0.015} rotation={[0,Math.PI/2,0]} position={[position[0]-10, position[1] - 6, position[1] - 6]} />
-            <primitive object={coffeeTable} scale={3} rotation={[0,Math.PI/2,0]} position={[position[0]-7.3, position[1] - 5, position[1] - 4.3]}/>
+            <L_Couch scale={0.015} rotation={[0,Math.PI/2,0]} position={[position[0]-10, position[1] - 6, position[1] - 6]} />
+            <CoffeeTable scale={3} rotation={[0,Math.PI/2,0]} position={[position[0]-7.3, position[1] - 5, position[1] - 4.3]}/>
+            <AcousticGuitar scale={0.1} rotation={[0,Math.PI/4,0]} position={[position[0]-10, position[1] - 5.95, position[1] - 11]}/>
 
 
             <Bookshelf position={[position[0], position[1], position[2] - 13.5]}/>
