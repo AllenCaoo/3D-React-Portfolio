@@ -35,7 +35,7 @@ h1 {
   line-height: 1.1;
 }
 
-button {
+/* button {
   border-radius: 8px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
@@ -52,6 +52,17 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+} */
+
+button {
+	-webkit-appearance: none;	
+	font-family: Courier;
+	font-size: 12pt;
+	text-align: center;
+	position: absolute;
+	min-width: 80px;
+	border-radius: 0;
+	z-index: 1;
 }
 
 @media (prefers-color-scheme: light) {
