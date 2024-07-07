@@ -2,10 +2,16 @@ import '../../index.css'
 
 
 
-const Book = () => {
+const Book =  ({
+  position, 
+  rotation,
+}: {
+  position: [number, number, number];
+  rotation: [number, number, number];
+}) => {
   return (
         <>
-          <mesh position={[0,2.5/2 + 0.05,0]} receiveShadow={true}>
+          <mesh position={position} receiveShadow={true} rotation={rotation} >
             <boxGeometry args={[0.3, 2.5, 1.8]}/>
             <meshNormalMaterial/>
           </mesh>

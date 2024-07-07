@@ -1,5 +1,6 @@
 import '../../index.css'
 import Book from './Book';
+import Books from './Books';
 
 
 
@@ -41,7 +42,8 @@ const Bookshelf = ({
                 <boxGeometry args={[0.1, 5.8, 1.8]}/>
                 <meshLambertMaterial/>
               </mesh>
-              <Book/>
+              <Books position={[-5 + 0.5,-(2.5/2 + 0.3),0]}/>
+              <Books position={[0.5,-(2.5/2 + 0.3),0]}/>
             </mesh>
         </>
   );
