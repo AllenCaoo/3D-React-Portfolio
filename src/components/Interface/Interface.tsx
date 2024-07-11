@@ -10,12 +10,12 @@ const Interface = () => {
   // });
 
   const [camPosition, setCamPosition] = useState([1, 1, 1]);
-  const [inLibraryView, setIsLibraryView] = useState(false)
+//   const [inLibraryView, setIsLibraryView] = useState(false)
 
 
   const setLibraryView = () => {
     setCamPosition([10,0,0])
-    setIsLibraryView(true)
+    // setIsLibraryView(true)
   }
 
   return (
