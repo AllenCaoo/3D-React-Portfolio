@@ -1,16 +1,16 @@
 import '../../App.css'
 
-function NavButton() {
-
-  // useThree(({ camera }) => {
-  //   camera.rotation.set(1, 0, 0);
-  // });
+const NavButton = ({
+  onClick
+} : {
+  onClick: any;
+}) => {
 
   return (
     <>
-      <button id="viewShelf" className="viewShelf">View Bookshelf</button>
+      <button id="viewShelf" className="viewShelf" onClick={onClick}>View Bookshelf</button>
     </>
   );
 }
 
-export default NavButton
+export default NavButton;

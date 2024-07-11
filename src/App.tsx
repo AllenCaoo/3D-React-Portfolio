@@ -1,6 +1,5 @@
 import './App.css'
-import NavButton from './components/Menu/NavButton';
-import Scene from './components/Scene/Scene';
+import Interface from './components/Interface/Interface';
 
 function App() {
 
@@ -10,8 +9,7 @@ function App() {
 
   return (
     <>
-      <NavButton/>
-      <Scene/>
+      <Interface/>
     </>
   );
 }
