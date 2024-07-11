@@ -1,4 +1,5 @@
 import './App.css'
+import NavButton from './components/Menu/NavButton';
 import Scene from './components/Scene/Scene';
 
 function App() {
@@ -9,7 +10,7 @@ function App() {
 
   return (
     <>
-      <button id="viewShelf" className="viewShelf">View Bookshelf</button>
+      <NavButton/>
       <Scene/>
     </>
   );
