@@ -21,7 +21,6 @@ const Interface = () => {
       if (inLibraryView) {
         let vec = new Vector3(0, -0.5, -5)
         state.camera.position.lerp(vec, 0.03)
-        state.camera.lookAt(0, 0, -40)
       } else {
         state.camera.position.lerp(INITAL_POSITION, 0.03)
       }
