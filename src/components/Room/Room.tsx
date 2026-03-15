@@ -30,24 +30,25 @@ const Room = ({
             <AcousticGuitar scale={0.1} rotation={[0,Math.PI/4,0]} position={[position[0]-10, position[1] - 5.95, position[1] - 11]}/>
 
             {/* Floor Lamp near Couch */}
-            <Lamp position={[position[0] - 10, position[1] - 6, position[1] + 5]} height={6} baseRadius={0.4} color="#ffaa33" />
-            
+            <Lamp position={[position[0] - 10, position[1] - 6, position[1] + 5]} height={6} baseRadius={0.4} color="#ffaa33" intensity={15} distance={60} />
+
             {/* Table Lamp on Coffee Table */}
             <Lamp 
               position={[position[0] - 8, position[1] - 4.4, position[1] - 4]} 
               height={1.5} 
               baseRadius={0.15} 
-              shadeRadiusTop={0.3} 
+              shadeRadiusTop={0.2} 
               shadeRadiusBottom={0.3} 
               color="#ffffff" 
+              intensity={10}
+              distance={40}
             />
 
 
             <Bookshelf position={[position[0], position[1], position[2] - 13.5]} inLibraryView={inLibraryView} setLibraryView={setLibraryView}/>
 
             {/* Tall Lamp to the right of Bookshelf */}
-            <Lamp position={[position[0] + 8.75, position[1] - 6, position[1] - 13.5]} height={8} baseRadius={0.5} color="#ffeebb" />
-
+            <Lamp position={[position[0] + 8.75, position[1] - 6, position[1] - 13.5]} height={8} baseRadius={0.5} color="#ffeebb" intensity={20} distance={80} />
 
 
             {/* <mesh position={[position[0], position[1] + 1, position[1]]} receiveShadow={true}>

@@ -53,15 +53,25 @@ const Lamp = ({
 
       {/* Actual Light */}
       {lightType === 'point' ? (
-        <pointLight 
-          position={[0, stemHeight + 0.5, 0]} 
-          intensity={intensity} 
-          distance={distance} 
-          color={color} 
-          castShadow 
-          shadow-bias={-0.001}
-          decay={2}
-        />
+        <>
+          <pointLight 
+            position={[0, stemHeight + 0.5, 0]} 
+            intensity={intensity} 
+            distance={distance} 
+            color={color} 
+            castShadow 
+            shadow-bias={-0.001}
+            decay={2}
+          />
+          {/* Bounce Light / Fill - No shadows for performance and to brighten walls */}
+          <pointLight 
+            position={[0, stemHeight + 0.5, 0]} 
+            intensity={intensity * 0.3} 
+            distance={distance * 1.5} 
+            color={color} 
+            decay={1} 
+          />
+        </>
       ) : (
         <spotLight
           position={[0, stemHeight + 0.5, 0]}
