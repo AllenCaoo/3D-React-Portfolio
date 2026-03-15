@@ -11,8 +11,8 @@ const Scene = ({ inLibraryView, setLibraryView }: SceneProps) => {
 
   return (
         <>
-          <ambientLight intensity={1} />
           <OrbitControls 
+
               enableZoom={true} 
               minAzimuthAngle={-Math.PI/4}
               maxAzimuthAngle={Math.PI/4} 
