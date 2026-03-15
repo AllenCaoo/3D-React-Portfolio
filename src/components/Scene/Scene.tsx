@@ -2,7 +2,12 @@ import { OrbitControls, ScrollControls } from "@react-three/drei";
 import '../../App.css'
 import Room from '../Room/Room';
 
-const Scene = () => {
+interface SceneProps {
+  inLibraryView: boolean;
+  setLibraryView: (value: boolean) => void;
+}
+
+const Scene = ({ inLibraryView, setLibraryView }: SceneProps) => {
 
   return (
         <>
@@ -14,7 +19,7 @@ const Scene = () => {
               /* TODO:  Restrict vertical angling */
               />
           <ScrollControls pages={3} damping={0.25}>
-            <Room position={[0,0,0]}/>
+            <Room position={[0,0,0]} inLibraryView={inLibraryView} setLibraryView={setLibraryView} />
           </ScrollControls>
         </>
   );

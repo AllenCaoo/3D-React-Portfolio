@@ -9,8 +9,12 @@ import Wall from './Wall';
 
 const Room = ({
     position,
+    inLibraryView,
+    setLibraryView,
 }: {
     position: [number, number, number];
+    inLibraryView: boolean;
+    setLibraryView: (value: boolean) => void;
 }) => {
 
   return (
@@ -36,7 +40,7 @@ const Room = ({
             <AcousticGuitar scale={0.1} rotation={[0,Math.PI/4,0]} position={[position[0]-10, position[1] - 5.95, position[1] - 11]}/>
 
 
-            <Bookshelf position={[position[0], position[1], position[2] - 13.5]}/>
+            <Bookshelf position={[position[0], position[1], position[2] - 13.5]} inLibraryView={inLibraryView} setLibraryView={setLibraryView}/>
 
 
 

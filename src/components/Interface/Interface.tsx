@@ -12,7 +12,7 @@ const Interface = () => {
   const INITAL_POSITION = new Vector3(10, 0, 12)
 
 
-  const setLibraryView = () => {
+  const toggleLibraryView = () => {
     setIsLibraryView(!inLibraryView)
   }
 
@@ -32,10 +32,10 @@ const Interface = () => {
 
   return (
     <>
-      <NavButton onClick={setLibraryView}/>
+      <NavButton onClick={toggleLibraryView}/>
       <Canvas>
         <CameraRig />  {/* Comment this out for free move debugging */}
-        <Scene />
+        <Scene inLibraryView={inLibraryView} setLibraryView={setIsLibraryView}/>
       </Canvas>
     </>
   );

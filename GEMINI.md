@@ -53,3 +53,20 @@ This project is a 3D portfolio built with React, Three.js, and Vite. It features
 *   Restrict vertical angling in `OrbitControls`.
 *   More interactive elements (clicking on objects).
 *   Refine the mobile view and responsiveness of the 3D canvas.
+
+## React Design Principles
+
+Adhere to KISS and SOLID principles, adapted for React component architecture:
+
+### KISS (Keep It Simple, Stupid)
+*   **Small Components:** Break down UI into small, focused components. If a component does too much, split it.
+*   **Simple State:** Avoid complex state management unless necessary. Prefer local state (`useState`) or context over heavy external libraries for simple apps.
+*   **Readable Props:** Keep prop interfaces simple and intuitive. Avoid passing excessive props ("prop drilling"); use Composition or Context instead.
+
+### SOLID in React
+
+*   **Single Responsibility Principle (SRP):** A component should have one primary job (e.g., displaying a user profile, managing a form, fetching data). Separate logic (hooks) from UI (JSX).
+*   **Open/Closed Principle (OCP):** Components should be open for extension but closed for modification. Use props (like `children`, `render props`, or variant flags) to extend behavior without altering the source code.
+*   **Liskov Substitution Principle (LSP):** In React, this translates to interchangeable components. If a component expects a `Button` prop, any component acting like a button should work without breaking the app.
+*   **Interface Segregation Principle (ISP):** Components should not depend on props they don't use. Pass only what is needed. If a component needs a `user` object but only uses `user.name`, consider passing just `name`.
+*   **Dependency Inversion Principle (DIP):** High-level components (layouts, pages) should not depend on low-level details (specific data fetching implementations). Use Custom Hooks or Context to abstract data sources.

@@ -1,6 +1,6 @@
 import '../../index.css'
 import Books from './Books';
-import { useTexture } from '@react-three/drei';
+import { useTexture, Html } from '@react-three/drei';
 
 
 
@@ -11,15 +11,34 @@ import { useTexture } from '@react-three/drei';
  */
 const Bookshelf = ({
     position, 
+    inLibraryView,
+    setLibraryView
 }: {
     position: [number, number, number];
+    inLibraryView: boolean;
+    setLibraryView: (value: boolean) => void;
 }) => {
 
   const bookshelfTexture = useTexture({map: 'textures/bookshelf.png'})
 
   return (
         <>
-            <mesh position={position}>
+            <mesh 
+              position={position}
+              onClick={(e) => {
+                e.stopPropagation();
+                setLibraryView(true);
+              }}
+            >
+              {inLibraryView && (
+                <Html position={[0, 1.5, 0]} transform>
+                  <div style={{ display: 'flex', gap: '10px', background: 'rgba(0,0,0,0.5)', padding: '10px', borderRadius: '8px' }}>
+                    <button style={{ position: 'static' }} onClick={(e) => { e.stopPropagation(); console.log('Read clicked'); }}>Read</button>
+                    <button style={{ position: 'static' }} onClick={(e) => { e.stopPropagation(); console.log('Arrange clicked'); }}>Arrange</button>
+                    <button style={{ position: 'static' }} onClick={(e) => { e.stopPropagation(); setLibraryView(false); }}>Close</button>
+                  </div>
+                </Html>
+              )}
               <mesh>
                 <boxGeometry args={[10, 0.1, 1.8]}/>
                 <meshLambertMaterial {...bookshelfTexture}/>
