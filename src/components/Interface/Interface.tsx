@@ -19,7 +19,7 @@ const Interface = () => {
   const CameraRig = () => {
     useFrame((state) => {
       if (inLibraryView) {
-        let vec = new Vector3(0, -0.5, -5)
+        const vec = new Vector3(0, -0.5, -5)
         state.camera.position.lerp(vec, 0.03)
       } else {
         state.camera.position.lerp(INITAL_POSITION, 0.03)

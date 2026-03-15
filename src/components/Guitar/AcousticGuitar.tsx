@@ -14,7 +14,7 @@ const AcousticGuitar =  ({
   rotation: [number, number, number];
 }) => {
 
-  let { scene } = useGLTF('models/acoustic_guitar.glb');
+  const { scene } = useGLTF('models/acoustic_guitar.glb');
 
 
   return (

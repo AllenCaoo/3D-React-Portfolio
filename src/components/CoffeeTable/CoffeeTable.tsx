@@ -14,7 +14,7 @@ const CoffeeTable =  ({
   rotation: [number, number, number];
 }) => {
 
-  let { scene } = useGLTF('models/coffee_table.glb');
+  const { scene } = useGLTF('models/coffee_table.glb');
 
 
   return (

@@ -3,7 +3,7 @@ import '../../App.css'
 const NavButton = ({
   onClick
 } : {
-  onClick: any;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
 }) => {
 
   return (

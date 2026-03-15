@@ -1,6 +1,7 @@
 import '../../index.css';
 import { useFBX } from '@react-three/drei';
 import { useEffect } from 'react';
+import * as THREE from 'three';
 
 
 
@@ -18,15 +19,15 @@ const L_Couch =  ({
   const scene = useFBX('models/L_couch.fbx');
 
   useEffect(() => {
-    scene.traverse((child: any) => {
-      if (child.isMesh && child.material) {
+    scene.traverse((child: THREE.Object3D) => {
+      if (child instanceof THREE.Mesh && child.material) {
         console.log("child is mesh and has material");
         console.log(child);
         // Normalize to array (if it's already an array, keep it, otherwise wrap)
         const materials = Array.isArray(child.material) ? child.material : [child.material];
 
-        materials.forEach((mat: any) => {
-          if (mat.isMeshPhongMaterial) {
+        materials.forEach((mat: THREE.Material) => {
+          if (mat instanceof THREE.MeshPhongMaterial) {
             mat.shininess = 2; // very low shininess
             // mat.specular.set(0x111111); // dark specular highlight
             mat.needsUpdate = true;  // Ensure the material updates
