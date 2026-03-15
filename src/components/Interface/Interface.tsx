@@ -2,15 +2,44 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import '../../App.css'
 import NavButton from '../Menu/NavButton';
 import Scene from '../Scene/Scene';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Vector3 } from 'three';
 
 const Interface = () => {
 
-  const [inLibraryView, setIsLibraryView] = useState(false);
+  const [inLibraryView, setIsLibraryView] = useState(() => {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('view') === 'library';
+  });
 
   const INITAL_POSITION = new Vector3(10, 0, 12)
 
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    const currentView = url.searchParams.get('view');
+    
+    if (inLibraryView) {
+      if (currentView !== 'library') {
+        url.searchParams.set('view', 'library');
+        window.history.pushState({}, '', url.toString());
+      }
+    } else {
+      if (currentView === 'library') {
+        url.searchParams.delete('view');
+        window.history.pushState({}, '', url.toString());
+      }
+    }
+  }, [inLibraryView]);
+
+  useEffect(() => {
+    const handlePopState = () => {
+      const params = new URLSearchParams(window.location.search);
+      setIsLibraryView(params.get('view') === 'library');
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
 
   const toggleLibraryView = () => {
     setIsLibraryView(!inLibraryView)
