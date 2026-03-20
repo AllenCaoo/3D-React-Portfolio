@@ -56,15 +56,15 @@ export const viewportProfiles: Record<ViewportMode, ViewportProfile> = {
         room: {
           position: new Vector3(0, -0.75, 18.5),
           lookAt: new Vector3(0, -1, -19),
-          fov: 64,
+          fov: 75,
         },
         library: {
           position: new Vector3(0, -0.5, -10.5),
           lookAt: new Vector3(0, -1, -19),
-          fov: 30,
+          fov: 45,
         },
       },
-      transitionLerp: 0.03,
+      transitionLerp: 0.02,
     },
     controls: {
       enablePan: false,
@@ -98,10 +98,10 @@ export const viewportProfiles: Record<ViewportMode, ViewportProfile> = {
         library: {
           position: new Vector3(0, -0.25, -11),
           lookAt: new Vector3(0, -1, -19),
-          fov: 45,
+          fov: 70,
         },
       },
-      transitionLerp: 0.03,
+      transitionLerp: 0.02,
     },
     controls: {
       enablePan: false,
@@ -144,7 +144,7 @@ export const viewportProfiles: Record<ViewportMode, ViewportProfile> = {
           fov: 54,
         },
       },
-      transitionLerp: 0.03,
+      transitionLerp: 0.02,
     },
     controls: {
       enablePan: false,

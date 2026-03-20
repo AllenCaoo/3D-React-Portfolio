@@ -70,6 +70,7 @@ const Interface = () => {
           profile={profile}
         />
         <Scene
+          cameraState={cameraState}
           inLibraryView={inLibraryView}
           controlsProfile={profile.controls}
           setLibraryView={setIsLibraryView}
