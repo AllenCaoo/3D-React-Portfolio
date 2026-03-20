@@ -17,11 +17,13 @@ This project is a 3D portfolio built with React, Three.js, and Vite. It features
 
 *   **Install Dependencies:** `npm install`
 *   **Run Development Server:** `npm run dev` (Runs at `http://localhost:5173`)
+*   **Run LAN/Mobile Dev Server:** `npm run dev:mobile`
+*   **Expose Local Dev via ngrok:** `npm run tunnel`
 *   **Build for Production:** `npm run build` (Outputs to `dist/`)
 *   **Deploy:** `npm run deploy` (Deploys to GitHub Pages via `gh-pages`)
 *   **Linting:** `npm run lint`
 
-**Deployment Note:** The project is configured with a base URL of `/3D-React-Portfolio/` in `vite.config.ts` for GitHub Pages.
+**Deployment Note:** `vite.config.ts` uses `/` for local dev and `/3D-React-Portfolio/` for production builds. Local development should use `http://localhost:5173/`, not `http://localhost:5173/3D-React-Portfolio/`. GitHub Pages still deploys to `https://allencaoo.github.io/3D-React-Portfolio/`.
 
 ## Architecture & Conventions
 
@@ -36,8 +38,18 @@ This project is a 3D portfolio built with React, Three.js, and Vite. It features
 
 ### Scene Management
 *   The `<Canvas />` component is located in `src/components/Interface/Interface.tsx`.
-*   Camera movement is handled by a `CameraRig` component inside `Interface.tsx`, which uses `useFrame` for smooth transitions between views (e.g., "Library View").
+*   Camera movement is handled by `src/components/Interface/CameraRig.tsx`, which uses `useFrame` for smooth transitions between views (e.g., "Library View").
 *   Interactive controls (like `OrbitControls` and `ScrollControls`) are defined in `src/components/Scene/Scene.tsx`.
+*   Viewport-specific behavior is centralized in `src/config/viewports.ts`. Desktop, tablet, and mobile differences should be added there first rather than scattered across components.
+*   Viewport detection is handled by `src/hooks/useViewportMode.ts`.
+*   The dev-only viewport overlay is rendered from `src/components/Interface/ViewportDebug.tsx`. Keep it outside the Three scene as normal DOM; avoid using `Html fullscreen` for fixed debug badges because the positioning becomes difficult to reason about.
+
+### Viewport Rules
+*   Treat desktop behavior as the baseline. Mobile and tablet adjustments should be additive and data-driven through the viewport profile config.
+*   Keep camera positions, FOV, DPR, shadow toggles, control limits, and HUD placement in `src/config/viewports.ts`.
+*   Prefer profile-driven HUD placement over CSS media queries when the placement is conceptually part of the viewport mode.
+*   Avoid broad global `button` styling in `src/index.css`; scope UI styles to specific classes like `.hudButton`, `.viewShelf`, and `.bookshelf-actionButton`.
+*   If mobile needs a bottom-pinned HUD button, explicitly unset conflicting desktop properties such as `top` in the mobile style object.
 
 ### Adding Models
 1.  Place the `.glb` or `.gltf` file in `public/models/`.
@@ -48,6 +60,7 @@ This project is a 3D portfolio built with React, Three.js, and Vite. It features
 ### Styling
 *   Global styles are in `src/App.css` and `src/index.css`.
 *   Standard CSS is used for UI elements.
+*   `src/index.css` should own only truly global layout and shared UI primitives. Device-specific HUD positioning belongs in the viewport profile config when possible.
 
 ## TODOs & Missing Features
 *   Restrict vertical angling in `OrbitControls`.

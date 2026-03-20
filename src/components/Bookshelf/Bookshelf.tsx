@@ -32,10 +32,10 @@ const Bookshelf = ({
             >
               {inLibraryView && (
                 <Html position={[0, 1.5, 0]} transform>
-                  <div style={{ display: 'flex', gap: '10px', background: 'rgba(0,0,0,0.5)', padding: '10px', borderRadius: '8px' }}>
-                    <button style={{ position: 'static' }} onClick={(e) => { e.stopPropagation(); console.log('Read clicked'); }}>Read</button>
-                    <button style={{ position: 'static' }} onClick={(e) => { e.stopPropagation(); console.log('Arrange clicked'); }}>Arrange</button>
-                    <button style={{ position: 'static' }} onClick={(e) => { e.stopPropagation(); setLibraryView(false); }}>Close</button>
+                  <div className="bookshelf-actions">
+                    <button className="bookshelf-actionButton" onClick={(e) => { e.stopPropagation(); console.log('Read clicked'); }}>Read</button>
+                    <button className="bookshelf-actionButton" onClick={(e) => { e.stopPropagation(); console.log('Arrange clicked'); }}>Arrange</button>
+                    <button className="bookshelf-actionButton" onClick={(e) => { e.stopPropagation(); setLibraryView(false); }}>Close</button>
                   </div>
                 </Html>
               )}

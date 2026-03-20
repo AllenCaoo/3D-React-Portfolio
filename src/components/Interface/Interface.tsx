@@ -1,18 +1,22 @@
-import { Canvas, useFrame } from '@react-three/fiber';
+import { Canvas } from '@react-three/fiber';
 import '../../App.css'
 import NavButton from '../Menu/NavButton';
 import Scene from '../Scene/Scene';
 import { useState, useEffect } from 'react';
-import { Vector3 } from 'three';
+import useViewportMode from '../../hooks/useViewportMode';
+import { viewportProfiles } from '../../config/viewports';
+import CameraRig from './CameraRig';
+import ViewportDebug from './ViewportDebug';
 
 const Interface = () => {
+  const viewportMode = useViewportMode();
+  const profile = viewportProfiles[viewportMode];
+  const [cameraPosition, setCameraPosition] = useState('0.0, 0.0, 0.0');
 
   const [inLibraryView, setIsLibraryView] = useState(() => {
     const params = new URLSearchParams(window.location.search);
     return params.get('view') === 'library';
   });
-
-  const INITAL_POSITION = new Vector3(10, 0, 12)
 
   useEffect(() => {
     const url = new URL(window.location.href);
@@ -45,26 +49,34 @@ const Interface = () => {
     setIsLibraryView(!inLibraryView)
   }
 
-  const CameraRig = () => {
-    useFrame((state) => {
-      if (inLibraryView) {
-        const vec = new Vector3(0, -0.5, -5)
-        state.camera.position.lerp(vec, 0.03)
-      } else {
-        state.camera.position.lerp(INITAL_POSITION, 0.03)
-      }
-      state.camera.lookAt(0, 0, -40)
-    })
-  
-    return null
-  }
-
   return (
     <>
-      <NavButton onClick={toggleLibraryView}/>
-      <Canvas shadows camera={{ position: [10, 0, 12], fov: 50 }}>
-        <CameraRig />  {/* Comment this out for free move debugging */}
-        <Scene inLibraryView={inLibraryView} setLibraryView={setIsLibraryView}/>
+      {import.meta.env.DEV && (
+        <ViewportDebug
+          cameraPosition={cameraPosition}
+          inLibraryView={inLibraryView}
+          viewportMode={viewportMode}
+        />
+      )}
+      <NavButton onClick={toggleLibraryView} style={profile.hud.viewShelfButtonStyle} />
+      <Canvas
+        dpr={profile.canvas.dpr}
+        shadows={profile.canvas.shadows}
+        camera={{
+          position: profile.camera.initialPosition.toArray(),
+          fov: profile.canvas.fov,
+        }}
+      >
+        <CameraRig
+          inLibraryView={inLibraryView}
+          onCameraPositionChange={import.meta.env.DEV ? setCameraPosition : undefined}
+          profile={profile}
+        />
+        <Scene
+          inLibraryView={inLibraryView}
+          controlsProfile={profile.controls}
+          setLibraryView={setIsLibraryView}
+        />
       </Canvas>
     </>
   );

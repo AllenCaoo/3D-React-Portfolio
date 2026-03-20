@@ -22,12 +22,18 @@ a:hover {
   color: #535bf2;
 }
 
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+}
+
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  overflow: hidden;
 }
 
 h1 {
@@ -35,37 +41,50 @@ h1 {
   line-height: 1.1;
 }
 
-/* button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-} */
-
-button {
-	-webkit-appearance: none;	
-	font-family: Courier;
-	font-size: 12pt;
-	text-align: center;
-	position: absolute;
-	min-width: 80px;
-	border-radius: 0;
-	z-index: 1;
+.hudButton {
+  -webkit-appearance: none;
+  min-width: 80px;
+  text-align: center;
 }
 
-/* CSS */
+.viewportDebug {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  z-index: 20;
+  pointer-events: none;
+  transform: translateX(-50%);
+}
+
+.viewportDebugCoordsWrap {
+  position: fixed;
+  right: 1rem;
+  top: 1rem;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.viewportDebugTag,
+.viewportDebugCoords {
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.72);
+  color: #fff;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  padding: 0.35rem 0.7rem;
+}
+
+.viewportDebugTag {
+  text-transform: uppercase;
+}
+
+.viewportDebugCoords {
+  font-family: ui-monospace, SFMono-Regular, SFMono-Regular, Menlo, monospace;
+}
+
 .viewShelf {
   align-items: center;
   appearance: none;
@@ -83,12 +102,34 @@ button {
   justify-content: center;
   line-height: 1.5;
   padding: calc(.5em - 1px) 1em;
+  position: fixed;
   text-align: center;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
   vertical-align: top;
   white-space: nowrap;
+  top: 1rem;
+  left: 1rem;
+  z-index: 20;
+}
+
+.bookshelf-actions {
+  display: flex;
+  gap: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.bookshelf-actionButton {
+  appearance: none;
+  border: 1px solid #dbdbdb;
+  border-radius: .375em;
+  cursor: pointer;
+  min-height: 2.5rem;
+  padding: 0.5rem 1rem;
+  position: static;
 }
 
 .viewShelf:active {
@@ -117,7 +158,20 @@ button {
   a:hover {
     color: #747bff;
   }
-  button {
+  .hudButton,
+  .bookshelf-actionButton {
     background-color: #f9f9f9;
+  }
+}
+
+@media (max-width: 768px) {
+  .bookshelf-actions {
+    flex-direction: column;
+    min-width: 9rem;
+  }
+
+  .bookshelf-actionButton {
+    min-height: 44px;
+    width: 100%;
   }
 }

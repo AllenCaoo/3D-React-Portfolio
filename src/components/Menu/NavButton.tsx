@@ -1,14 +1,17 @@
 import '../../App.css'
+import type { CSSProperties, MouseEventHandler } from 'react';
 
 const NavButton = ({
-  onClick
+  onClick,
+  style,
 } : {
-  onClick: React.MouseEventHandler<HTMLButtonElement>;
+  onClick: MouseEventHandler<HTMLButtonElement>;
+  style: CSSProperties;
 }) => {
 
   return (
     <>
-      <button id="viewShelf" className="viewShelf" onClick={onClick}>View Bookshelf</button>
+      <button id="viewShelf" className="hudButton viewShelf" onClick={onClick} style={style}>View Bookshelf</button>
     </>
   );
 }
