@@ -9,6 +9,8 @@ export const TABLET_BREAKPOINT = 1024;
 export interface OrbitControlsProfile {
   enablePan?: boolean;
   enableZoom?: boolean;
+  minDistance?: number;
+  maxDistance?: number;
   minAzimuthAngle?: number;
   maxAzimuthAngle?: number;
   minPolarAngle?: number;
@@ -20,13 +22,22 @@ export interface OrbitControlsProfile {
 export interface ViewportProfile {
   canvas: {
     dpr: [number, number];
-    fov: number;
     shadows: boolean;
   };
   camera: {
-    initialPosition: Vector3;
-    libraryPosition: Vector3;
-    lookAt: Vector3;
+    states: {
+      library: {
+        fov: number;
+        lookAt: Vector3;
+        position: Vector3;
+      };
+      room: {
+        fov: number;
+        lookAt: Vector3;
+        position: Vector3;
+      };
+    };
+    transitionLerp: number;
   };
   controls: OrbitControlsProfile;
   hud: {
@@ -38,18 +49,32 @@ export const viewportProfiles: Record<ViewportMode, ViewportProfile> = {
   desktop: {
     canvas: {
       dpr: [1, 2],
-      fov: 50,
       shadows: true,
     },
     camera: {
-      initialPosition: new Vector3(10, 0, 12),
-      libraryPosition: new Vector3(0, -0.5, -5),
-      lookAt: new Vector3(0, 0, -40),
+      states: {
+        room: {
+          position: new Vector3(0, -0.75, 18.5),
+          lookAt: new Vector3(0, -1, -19),
+          fov: 64,
+        },
+        library: {
+          position: new Vector3(0, -0.5, -10.5),
+          lookAt: new Vector3(0, -1, -19),
+          fov: 30,
+        },
+      },
+      transitionLerp: 0.03,
     },
     controls: {
+      enablePan: false,
       enableZoom: true,
+      minDistance: 16,
+      maxDistance: 22,
       minAzimuthAngle: -Math.PI / 4,
       maxAzimuthAngle: Math.PI / 4,
+      minPolarAngle: Math.PI / 2.15,
+      maxPolarAngle: Math.PI / 1.85,
     },
     hud: {
       viewShelfButtonStyle: {
@@ -61,21 +86,32 @@ export const viewportProfiles: Record<ViewportMode, ViewportProfile> = {
   mobile: {
     canvas: {
       dpr: [1, 1.5],
-      fov: 58,
       shadows: false,
     },
     camera: {
-      initialPosition: new Vector3(8, 0, 12),
-      libraryPosition: new Vector3(0, -0.25, -6),
-      lookAt: new Vector3(0, 0, -40),
+      states: {
+        room: {
+          position: new Vector3(0, -0.75, 19),
+          lookAt: new Vector3(0, -1, -19),
+          fov: 100,
+        },
+        library: {
+          position: new Vector3(0, -0.25, -11),
+          lookAt: new Vector3(0, -1, -19),
+          fov: 45,
+        },
+      },
+      transitionLerp: 0.03,
     },
     controls: {
       enablePan: false,
       enableZoom: false,
+      minDistance: 18,
+      maxDistance: 22,
       minAzimuthAngle: -Math.PI / 4,
       maxAzimuthAngle: Math.PI / 4,
       minPolarAngle: Math.PI / 2.15,
-      maxPolarAngle: Math.PI / 1.95,
+      maxPolarAngle: Math.PI / 1.85,
       rotateSpeed: 0.65,
       zoomSpeed: 0.8,
     },
@@ -93,21 +129,32 @@ export const viewportProfiles: Record<ViewportMode, ViewportProfile> = {
   tablet: {
     canvas: {
       dpr: [1, 1.75],
-      fov: 54,
       shadows: true,
     },
     camera: {
-      initialPosition: new Vector3(9, 0, 12),
-      libraryPosition: new Vector3(0, -0.4, -5.5),
-      lookAt: new Vector3(0, 0, -40),
+      states: {
+        room: {
+          position: new Vector3(0, -0.75, 18.75),
+          lookAt: new Vector3(0, -1, -19),
+          fov: 68,
+        },
+        library: {
+          position: new Vector3(0, -0.4, -10.75),
+          lookAt: new Vector3(0, -1, -19),
+          fov: 54,
+        },
+      },
+      transitionLerp: 0.03,
     },
     controls: {
       enablePan: false,
       enableZoom: true,
+      minDistance: 17,
+      maxDistance: 22,
       minAzimuthAngle: -Math.PI / 4,
       maxAzimuthAngle: Math.PI / 4,
-      minPolarAngle: Math.PI / 3.5,
-      maxPolarAngle: Math.PI / 1.35,
+      minPolarAngle: Math.PI / 2.1,
+      maxPolarAngle: Math.PI / 1.8,
       rotateSpeed: 0.9,
       zoomSpeed: 0.9,
     },

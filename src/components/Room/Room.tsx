@@ -5,6 +5,7 @@ import AcousticGuitar from '../Guitar/AcousticGuitar';
 import L_Couch from '../L_Couch/L_Couch';
 import Wall from './Wall';
 import Lamp from '../Lamp/Lamp';
+import { roomDimensions, roomFurniture, roomLamps } from '../../config/room';
 
 const Room = ({
     position,
@@ -18,37 +19,24 @@ const Room = ({
 
   return (
         <>
-            <Wall position={[position[0], position[1] - 6, position[1]]} dimensions={[25, 0.1, 30]}/>  {/* ground */}
-            <Wall position={[position[0], position[1] + 10, position[2]]} dimensions={[25, 0.1, 30]}/> {/* roof */}
-            <Wall position={[position[0]+25/2, position[1] + 2, position[1]]} dimensions={[0.1, 16, 30]}/>
-            <Wall position={[position[0], position[1] + 2, position[1] + 30/2]} dimensions={[25, 16, 0.1]}/>
-            <Wall position={[position[0], position[1] + 2, position[1] - 30/2]} dimensions={[25, 16, 0.1]}/>
-            <Wall position={[position[0]-25/2, position[1] + 2, position[1]]} dimensions={[0.1, 16, 30]}/>
+            <Wall position={[position[0], position[1] + roomDimensions.floorY, position[1]]} dimensions={[roomDimensions.width, 0.1, roomDimensions.depth]}/>  {/* ground */}
+            <Wall position={[position[0], position[1] + roomDimensions.ceilingY, position[2]]} dimensions={[roomDimensions.width, 0.1, roomDimensions.depth]}/> {/* roof */}
+            <Wall position={[position[0] + roomDimensions.width / 2, position[1] + roomDimensions.wallCenterY, position[1]]} dimensions={[0.1, roomDimensions.height, roomDimensions.depth]}/>
+            <Wall position={[position[0], position[1] + roomDimensions.wallCenterY, position[1] + roomDimensions.depth / 2]} dimensions={[roomDimensions.width, roomDimensions.height, 0.1]}/>
+            <Wall position={[position[0], position[1] + roomDimensions.wallCenterY, position[1] - roomDimensions.depth / 2]} dimensions={[roomDimensions.width, roomDimensions.height, 0.1]}/>
+            <Wall position={[position[0] - roomDimensions.width / 2, position[1] + roomDimensions.wallCenterY, position[1]]} dimensions={[0.1, roomDimensions.height, roomDimensions.depth]}/>
 
-            <L_Couch scale={0.015} rotation={[0,Math.PI/2,0]} position={[position[0]-10, position[1] - 6, position[1] - 6]} />
-            <CoffeeTable scale={3} rotation={[0,Math.PI/2,0]} position={[position[0]-7.3, position[1] - 5, position[1] - 4.3]}/>
-            <AcousticGuitar scale={0.1} rotation={[0,Math.PI/4,0]} position={[position[0]-10, position[1] - 5.95, position[1] - 11]}/>
+            <L_Couch scale={roomFurniture.couch.scale} rotation={roomFurniture.couch.rotation} position={[position[0] + roomFurniture.couch.position[0], position[1] + roomFurniture.couch.position[1], position[2] + roomFurniture.couch.position[2]]} />
+            <CoffeeTable scale={roomFurniture.coffeeTable.scale} rotation={roomFurniture.coffeeTable.rotation} position={[position[0] + roomFurniture.coffeeTable.position[0], position[1] + roomFurniture.coffeeTable.position[1], position[2] + roomFurniture.coffeeTable.position[2]]}/>
+            <AcousticGuitar scale={roomFurniture.guitar.scale} rotation={roomFurniture.guitar.rotation} position={[position[0] + roomFurniture.guitar.position[0], position[1] + roomFurniture.guitar.position[1], position[2] + roomFurniture.guitar.position[2]]}/>
 
-            {/* Floor Lamp near Couch */}
-            <Lamp position={[position[0] - 10, position[1] - 6, position[1] + 5]} height={6} baseRadius={0.4} color="#ffaa33" intensity={15} distance={60} />
+            <Lamp position={[position[0] + roomLamps.floorLamp.position[0], position[1] + roomLamps.floorLamp.position[1], position[2] + roomLamps.floorLamp.position[2]]} height={roomLamps.floorLamp.height} baseRadius={roomLamps.floorLamp.baseRadius} color={roomLamps.floorLamp.color} intensity={roomLamps.floorLamp.intensity} distance={roomLamps.floorLamp.distance} />
 
-            {/* Table Lamp on Coffee Table */}
-            <Lamp 
-              position={[position[0] - 8, position[1] - 4.4, position[1] - 4]} 
-              height={1.5} 
-              baseRadius={0.15} 
-              shadeRadiusTop={0.2} 
-              shadeRadiusBottom={0.3} 
-              color="#ffffff" 
-              intensity={10}
-              distance={40}
-            />
+            <Lamp position={[position[0] + roomLamps.tableLamp.position[0], position[1] + roomLamps.tableLamp.position[1], position[2] + roomLamps.tableLamp.position[2]]} height={roomLamps.tableLamp.height} baseRadius={roomLamps.tableLamp.baseRadius} shadeRadiusTop={roomLamps.tableLamp.shadeRadiusTop} shadeRadiusBottom={roomLamps.tableLamp.shadeRadiusBottom} color={roomLamps.tableLamp.color} intensity={roomLamps.tableLamp.intensity} distance={roomLamps.tableLamp.distance} />
 
+            <Bookshelf position={[position[0] + roomFurniture.bookshelf.position[0], position[1] + roomFurniture.bookshelf.position[1], position[2] + roomFurniture.bookshelf.position[2]]} inLibraryView={inLibraryView} setLibraryView={setLibraryView}/>
 
-            <Bookshelf position={[position[0], position[1], position[2] - 13.5]} inLibraryView={inLibraryView} setLibraryView={setLibraryView}/>
-
-            {/* Tall Lamp to the right of Bookshelf */}
-            <Lamp position={[position[0] + 8.75, position[1] - 6, position[1] - 13.5]} height={8} baseRadius={0.5} color="#ffeebb" intensity={20} distance={80} />
+            <Lamp position={[position[0] + roomLamps.bookshelfLamp.position[0], position[1] + roomLamps.bookshelfLamp.position[1], position[2] + roomLamps.bookshelfLamp.position[2]]} height={roomLamps.bookshelfLamp.height} baseRadius={roomLamps.bookshelfLamp.baseRadius} color={roomLamps.bookshelfLamp.color} intensity={roomLamps.bookshelfLamp.intensity} distance={roomLamps.bookshelfLamp.distance} />
 
 
             {/* <mesh position={[position[0], position[1] + 1, position[1]]} receiveShadow={true}>

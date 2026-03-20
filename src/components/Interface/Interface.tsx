@@ -4,19 +4,16 @@ import NavButton from '../Menu/NavButton';
 import Scene from '../Scene/Scene';
 import { useState, useEffect } from 'react';
 import useViewportMode from '../../hooks/useViewportMode';
-import { viewportProfiles } from '../../config/viewports';
 import CameraRig from './CameraRig';
 import ViewportDebug from './ViewportDebug';
 
 const Interface = () => {
-  const viewportMode = useViewportMode();
-  const profile = viewportProfiles[viewportMode];
-  const [cameraPosition, setCameraPosition] = useState('0.0, 0.0, 0.0');
-
   const [inLibraryView, setIsLibraryView] = useState(() => {
     const params = new URLSearchParams(window.location.search);
     return params.get('view') === 'library';
   });
+  const { cameraState, profile, viewportMode } = useViewportMode(inLibraryView);
+  const [cameraPosition, setCameraPosition] = useState('0.0, 0.0, 0.0');
 
   useEffect(() => {
     const url = new URL(window.location.href);
@@ -63,12 +60,12 @@ const Interface = () => {
         dpr={profile.canvas.dpr}
         shadows={profile.canvas.shadows}
         camera={{
-          position: profile.camera.initialPosition.toArray(),
-          fov: profile.canvas.fov,
+          position: profile.camera.states.room.position.toArray(),
+          fov: profile.camera.states.room.fov,
         }}
       >
         <CameraRig
-          inLibraryView={inLibraryView}
+          cameraState={cameraState}
           onCameraPositionChange={import.meta.env.DEV ? setCameraPosition : undefined}
           profile={profile}
         />
