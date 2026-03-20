@@ -132,6 +132,10 @@ h1 {
   position: static;
 }
 
+.bookReaderClose {
+  min-width: 9rem;
+}
+
 .viewShelf:active {
   border-color: #4a4a4a;
   outline: 0;

@@ -78,9 +78,11 @@ const SHELF_VARIANTS: BookConfig[][] = [
  * @returns books mesh
  */
 const Books = ({
+  hiddenBookIndex,
   position,
   shelfIndex = 0,
 }: {
+  hiddenBookIndex?: number;
   position: [number, number, number];
   shelfIndex?: number;
 }) => {
@@ -96,6 +98,10 @@ const Books = ({
         const gap = book.gapAfter ?? 0.015;
         const x = position[0] + cursorX + width / 2;
         cursorX += width + gap;
+
+        if (hiddenBookIndex === index) {
+          return null;
+        }
 
         return (
           <Book
