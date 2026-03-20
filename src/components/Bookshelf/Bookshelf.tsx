@@ -39,34 +39,34 @@ const Bookshelf = ({
                   </div>
                 </Html>
               )}
-              <mesh>
+              <mesh castShadow receiveShadow>
                 <boxGeometry args={[10, 0.1, 1.8]}/>
-                <meshLambertMaterial {...bookshelfTexture}/>
+                <meshStandardMaterial {...bookshelfTexture} roughness={0.88} metalness={0.04}/>
               </mesh>
-              <mesh position={[0, -2.9, 0]}>
+              <mesh position={[0, -2.9, 0]} castShadow receiveShadow>
                 <boxGeometry args={[10, 0.1, 1.8]}/>
-                <meshLambertMaterial {...bookshelfTexture}/>
+                <meshStandardMaterial {...bookshelfTexture} roughness={0.88} metalness={0.04}/>
               </mesh>
-              <mesh position={[0, -5.8, 0]}>
+              <mesh position={[0, -5.8, 0]} castShadow receiveShadow>
                 <boxGeometry args={[10, 0.1, 1.8]}/>
-                <meshLambertMaterial {...bookshelfTexture}/>
+                <meshStandardMaterial {...bookshelfTexture} roughness={0.88} metalness={0.04}/>
               </mesh>
-              <mesh position={[0, -2.9, 0]}>
+              <mesh position={[0, -2.9, 0]} castShadow receiveShadow>
                 <boxGeometry args={[0.1, 5.8, 1.8]}/>
-                <meshLambertMaterial {...bookshelfTexture}/>
+                <meshStandardMaterial {...bookshelfTexture} roughness={0.88} metalness={0.04}/>
               </mesh>
-              <mesh position={[5, -2.9, 0]}>
+              <mesh position={[5, -2.9, 0]} castShadow receiveShadow>
                 <boxGeometry args={[0.1, 5.8, 1.8]}/>
-                <meshLambertMaterial {...bookshelfTexture}/>
+                <meshStandardMaterial {...bookshelfTexture} roughness={0.88} metalness={0.04}/>
               </mesh>
-              <mesh position={[-5, -2.9, 0]}>
+              <mesh position={[-5, -2.9, 0]} castShadow receiveShadow>
                 <boxGeometry args={[0.1, 5.8, 1.8]}/>
-                <meshLambertMaterial {...bookshelfTexture}/>
+                <meshStandardMaterial {...bookshelfTexture} roughness={0.88} metalness={0.04}/>
               </mesh>
-              <Books position={[-5 + 0.5,-(2.5/2 + 0.3),0]}/>
-              <Books position={[-5 + 0.5, -4.5, 0]}/>
-              <Books position={[0.5,-(2.5/2 + 0.3),0]}/>
-              <Books position={[0.5,-4.5,0]}/>
+              <Books position={[-4.45,-1.6,0]}/>
+              <Books position={[-4.45, -4.5, 0]} shelfIndex={1}/>
+              <Books position={[0.55,-1.6,0]} shelfIndex={2}/>
+              <Books position={[0.55,-4.5,0]} shelfIndex={3}/>
             </mesh>
         </>
   );

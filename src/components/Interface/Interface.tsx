@@ -62,7 +62,7 @@ const Interface = () => {
   return (
     <>
       <NavButton onClick={toggleLibraryView}/>
-      <Canvas>
+      <Canvas shadows camera={{ position: [10, 0, 12], fov: 50 }}>
         <CameraRig />  {/* Comment this out for free move debugging */}
         <Scene inLibraryView={inLibraryView} setLibraryView={setIsLibraryView}/>
       </Canvas>
