@@ -8,7 +8,19 @@ module.exports = {
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+  },
   plugins: ['react-refresh'],
+  overrides: [
+    {
+      files: ['vite.config.ts'],
+      env: {
+        node: true,
+      },
+    },
+  ],
   rules: {
     'react-refresh/only-export-components': [
       'warn',
