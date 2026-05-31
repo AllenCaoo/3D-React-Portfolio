@@ -87,6 +87,17 @@ This project is a 3D portfolio built with React, Three.js, and Vite. It features
 *   `src/index.css` should own only truly global layout and shared UI primitives. Device-specific HUD positioning belongs in the viewport profile config when possible.
 *   Debug HUD styling should stay in CSS, but its placement logic should stay as normal DOM outside the Three scene.
 
+## Testing & Verification
+
+### Visual Testing with Playwright
+
+Use the `.claude/skills/test-3-js.md` skill when verifying UI changes in the 3D scene. Key points:
+
+*   **Page load:** Use `domcontentloaded` + `waitForTimeout(5000)`, not `networkidle` (WebGL streaming causes timeouts).
+*   **Clicking `<Html transform>` buttons:** Use `page.evaluate(() => el.dispatchEvent(new MouseEvent('click', { bubbles: true })))` instead of Playwright's `.click()`, which fails with "element is not stable" on drei Html elements.
+*   **HUD/overlay buttons:** Standard Playwright `.click()` works fine for DOM elements outside the canvas.
+*   **Screenshots:** Install Playwright in a temp directory to avoid polluting the project. Save screenshots to `test-results/`.
+
 ## TODOs & Missing Features
 *   More interactive elements (clicking on objects).
 *   Move bookshelf action definitions (`Read`, `Arrange`, `Close`) into config instead of inline JSX.
