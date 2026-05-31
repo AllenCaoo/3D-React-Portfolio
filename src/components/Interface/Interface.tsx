@@ -7,8 +7,6 @@ import useViewportMode from '../../hooks/useViewportMode';
 import CameraRig from './CameraRig';
 import ViewportDebug from './ViewportDebug';
 import CategoryNav from '../Library/CategoryNav';
-import CategoryContent from '../Library/CategoryContent';
-import { getCategoryById } from '../../config/categories';
 
 const Interface = () => {
   const [inLibraryView, setIsLibraryView] = useState(() => {
@@ -86,17 +84,13 @@ const Interface = () => {
         />
       )}
       <NavButton onClick={toggleLibraryView} style={profile.hud.viewShelfButtonStyle} />
-      {inLibraryView && (
+      {inLibraryView && !selectedCategory && (
         <CategoryNav
           selectedId={selectedCategory}
           onSelect={setSelectedCategory}
           onClose={toggleLibraryView}
         />
       )}
-      <CategoryContent
-        category={getCategoryById(selectedCategory)}
-        onBack={() => setSelectedCategory(null)}
-      />
       <Canvas
         dpr={profile.canvas.dpr}
         shadows={profile.canvas.shadows}
@@ -115,6 +109,8 @@ const Interface = () => {
           inLibraryView={inLibraryView}
           controlsProfile={profile.controls}
           setLibraryView={setIsLibraryView}
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
         />
       </Canvas>
     </>

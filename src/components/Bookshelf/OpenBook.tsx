@@ -2,8 +2,10 @@ import { Html } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { useRef } from 'react';
 import { Group, MathUtils, Vector3 } from 'three';
+import type { BookshelfCategory } from '../../config/categories';
 
 interface OpenBookProps {
+  category: BookshelfCategory;
   onClose: () => void;
 }
 
@@ -20,7 +22,7 @@ const SPINE_WIDTH = 0.16;
 const CLOSED_SCALE = 1;
 const OPEN_SCALE = 1.9;
 
-const OpenBook = ({ onClose }: OpenBookProps) => {
+const OpenBook = ({ category, onClose }: OpenBookProps) => {
   const groupRef = useRef<Group | null>(null);
   const progressRef = useRef(0);
 
@@ -81,6 +83,18 @@ const OpenBook = ({ onClose }: OpenBookProps) => {
           <boxGeometry args={[PAGE_WIDTH, BOOK_HEIGHT - 0.12, PAGE_DEPTH]} />
           <meshStandardMaterial color="#f5eddc" roughness={0.96} metalness={0.01} />
         </mesh>
+        {/* Category content printed on the right page — rotates into view as the book opens */}
+        <Html
+          position={[SPINE_WIDTH / 2 + PAGE_WIDTH / 2, 0.1, PAGE_DEPTH / 2 + 0.03 + 0.04]}
+          transform
+          center
+          style={{ pointerEvents: 'none', width: '85px' }}
+        >
+          <div className="open-book-page">
+            <h4 className="open-book-page__title">{category.label}</h4>
+            <p className="open-book-page__body">{category.content}</p>
+          </div>
+        </Html>
       </group>
 
       <Html position={[0, -1.95, 0.5]} transform>
