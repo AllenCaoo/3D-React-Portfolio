@@ -33,7 +33,7 @@ const Bookshelf = ({
                 setLibraryView(true);
               }}
             >
-              {inLibraryView && (
+              {inLibraryView && !isReading && (
                 <Html position={[0, 1.5, 0]} transform>
                   <div className="bookshelf-actions">
                     <button className="bookshelf-actionButton" onClick={(e) => { e.stopPropagation(); setIsReading(true); }}>Read</button>
