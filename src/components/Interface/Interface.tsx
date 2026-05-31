@@ -7,6 +7,8 @@ import useViewportMode from '../../hooks/useViewportMode';
 import CameraRig from './CameraRig';
 import ViewportDebug from './ViewportDebug';
 import CategoryNav from '../Library/CategoryNav';
+import CategoryPage from '../Library/CategoryPage';
+import { getCategoryById } from '../../config/categories';
 
 const Interface = () => {
   const [inLibraryView, setIsLibraryView] = useState(() => {
@@ -91,6 +93,12 @@ const Interface = () => {
           onClose={toggleLibraryView}
         />
       )}
+      {selectedCategory && (
+        <CategoryPage
+          category={getCategoryById(selectedCategory)!}
+          onClose={() => setSelectedCategory(null)}
+        />
+      )}
       <Canvas
         dpr={profile.canvas.dpr}
         shadows={profile.canvas.shadows}
@@ -106,11 +114,9 @@ const Interface = () => {
         />
         <Scene
           cameraState={cameraState}
-          inLibraryView={inLibraryView}
+          inLibraryView={inLibraryView && !selectedCategory}
           controlsProfile={profile.controls}
           setLibraryView={setIsLibraryView}
-          selectedCategory={selectedCategory}
-          setSelectedCategory={setSelectedCategory}
         />
       </Canvas>
     </>

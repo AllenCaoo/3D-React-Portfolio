@@ -11,14 +11,10 @@ const Room = ({
     position,
     inLibraryView,
     setLibraryView,
-    selectedCategory,
-    setSelectedCategory,
 }: {
     position: [number, number, number];
     inLibraryView: boolean;
     setLibraryView: (value: boolean) => void;
-    selectedCategory: string | null;
-    setSelectedCategory: (id: string | null) => void;
 }) => {
 
   return (
@@ -38,15 +34,9 @@ const Room = ({
 
             <Lamp position={[position[0] + roomLamps.tableLamp.position[0], position[1] + roomLamps.tableLamp.position[1], position[2] + roomLamps.tableLamp.position[2]]} height={roomLamps.tableLamp.height} baseRadius={roomLamps.tableLamp.baseRadius} shadeRadiusTop={roomLamps.tableLamp.shadeRadiusTop} shadeRadiusBottom={roomLamps.tableLamp.shadeRadiusBottom} color={roomLamps.tableLamp.color} intensity={roomLamps.tableLamp.intensity} distance={roomLamps.tableLamp.distance} />
 
-            <Bookshelf position={[position[0] + roomFurniture.bookshelf.position[0], position[1] + roomFurniture.bookshelf.position[1], position[2] + roomFurniture.bookshelf.position[2]]} inLibraryView={inLibraryView} setLibraryView={setLibraryView} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory}/>
+            <Bookshelf position={[position[0] + roomFurniture.bookshelf.position[0], position[1] + roomFurniture.bookshelf.position[1], position[2] + roomFurniture.bookshelf.position[2]]} inLibraryView={inLibraryView} setLibraryView={setLibraryView}/>
 
             <Lamp position={[position[0] + roomLamps.bookshelfLamp.position[0], position[1] + roomLamps.bookshelfLamp.position[1], position[2] + roomLamps.bookshelfLamp.position[2]]} height={roomLamps.bookshelfLamp.height} baseRadius={roomLamps.bookshelfLamp.baseRadius} color={roomLamps.bookshelfLamp.color} intensity={roomLamps.bookshelfLamp.intensity} distance={roomLamps.bookshelfLamp.distance} />
-
-
-            {/* <mesh position={[position[0], position[1] + 1, position[1]]} receiveShadow={true}>
-              <sphereGeometry args={[5, 32, 16]}/>
-              <meshStandardMaterial color={0xffff00}/>
-            </mesh> */}
         </>
   );
 }

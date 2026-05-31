@@ -8,8 +8,6 @@ interface SceneProps {
   inLibraryView: boolean;
   controlsProfile: OrbitControlsProfile;
   setLibraryView: (value: boolean) => void;
-  selectedCategory: string | null;
-  setSelectedCategory: (id: string | null) => void;
 }
 
 const Scene = ({
@@ -17,8 +15,6 @@ const Scene = ({
   inLibraryView,
   controlsProfile,
   setLibraryView,
-  selectedCategory,
-  setSelectedCategory,
 }: SceneProps) => {
   return (
         <>
@@ -28,13 +24,7 @@ const Scene = ({
             {...controlsProfile}
           />
           <ScrollControls pages={3} damping={0.25}>
-            <Room
-              position={[0,0,0]}
-              inLibraryView={inLibraryView}
-              setLibraryView={setLibraryView}
-              selectedCategory={selectedCategory}
-              setSelectedCategory={setSelectedCategory}
-            />
+            <Room position={[0,0,0]} inLibraryView={inLibraryView} setLibraryView={setLibraryView} />
           </ScrollControls>
         </>
   );
