@@ -31,7 +31,7 @@ const OpenBook = ({ onClose }: OpenBookProps) => {
 
     progressRef.current = Math.min(progressRef.current + delta * 0.8, 1);
     const easedProgress = 1 - Math.pow(1 - progressRef.current, 3);
-    const spread = MathUtils.lerp(0, Math.PI / 2, easedProgress);
+    const spread = MathUtils.lerp(Math.PI / 2, 0, easedProgress);
 
     groupRef.current.position.lerpVectors(CLOSED_POSITION, OPEN_POSITION, easedProgress);
     const scale = MathUtils.lerp(CLOSED_SCALE, OPEN_SCALE, easedProgress);
