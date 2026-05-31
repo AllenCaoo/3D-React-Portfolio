@@ -215,6 +215,57 @@ node /path/to/verify.cjs
 | Video recording | `browser.newContext({ recordVideo: { dir, size } })` |
 | Output directory | `/tmp/3d-portfolio-test-results/` |
 
+## Sharing Test Artifacts (Screenshots & Recordings)
+
+After capturing screenshots or recordings, attempt to share them in the following order. **Stop at the first step that succeeds.**
+
+### Step 1 — Upload directly to the PR (preferred)
+
+Use `mcp__github__add_issue_comment` (or `mcp__github__add_reply_to_pull_request_comment`) to post a comment with an embedded image. GitHub renders Markdown image syntax if you first upload the file to a publicly reachable URL or paste it as a base64 data URI in the comment body.
+
+If the MCP tools or `gh` CLI are not available, or the upload returns an error, move to step 2.
+
+### Step 2 — Push artifacts to a separate dev branch (fallback)
+
+**Do NOT push to the current PR branch.** Create a dedicated branch only for test evidence.
+
+```bash
+# 1. Collect artifacts into a staging dir
+ARTIFACT_DIR="/tmp/3d-portfolio-test-results"
+BRANCH="test-artifacts/$(date +%Y%m%d-%H%M%S)"
+
+# 2. Create (or switch to) the artifact branch from the current HEAD
+git checkout -b "$BRANCH"
+
+# 3. Copy artifacts into a tracked directory
+mkdir -p test-results
+cp "$ARTIFACT_DIR"/*.png "$ARTIFACT_DIR"/*.webm 2>/dev/null test-results/ || true
+
+# 4. Commit — skip if nothing was copied
+git add test-results/
+git diff --cached --quiet || git commit -m "test: add visual verification artifacts"
+
+# 5. Push the artifact branch (not the PR branch)
+git push -u origin "$BRANCH"
+
+# 6. Return to the original branch immediately
+git checkout -
+```
+
+After pushing, **link to the artifact branch in a PR comment** so reviewers know where to find the screenshots. Example comment text:
+
+```
+Screenshots for this change could not be embedded directly.
+Visual verification artifacts are on branch: test-artifacts/20260531-143000
+Path: test-results/
+```
+
+### What NOT to do
+
+- **Do not push screenshots to the same branch as the PR.** Test artifacts are not source code and should not appear in the PR diff.
+- **Do not leave screenshots only in `/tmp/`** — they are ephemeral and will be lost when the container is reclaimed.
+- **Do not skip sharing entirely** — if visual verification was requested, reviewers need to see evidence. Always complete one of the two steps above.
+
 ## Common Mistakes
 
 - **Using `networkidle`** — WebGL asset streaming causes timeouts or premature firing. Use `domcontentloaded` + explicit wait.
