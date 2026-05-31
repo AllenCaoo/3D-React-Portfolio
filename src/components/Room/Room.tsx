@@ -37,12 +37,6 @@ const Room = ({
             <Bookshelf position={[position[0] + roomFurniture.bookshelf.position[0], position[1] + roomFurniture.bookshelf.position[1], position[2] + roomFurniture.bookshelf.position[2]]} inLibraryView={inLibraryView} setLibraryView={setLibraryView}/>
 
             <Lamp position={[position[0] + roomLamps.bookshelfLamp.position[0], position[1] + roomLamps.bookshelfLamp.position[1], position[2] + roomLamps.bookshelfLamp.position[2]]} height={roomLamps.bookshelfLamp.height} baseRadius={roomLamps.bookshelfLamp.baseRadius} color={roomLamps.bookshelfLamp.color} intensity={roomLamps.bookshelfLamp.intensity} distance={roomLamps.bookshelfLamp.distance} />
-
-
-            {/* <mesh position={[position[0], position[1] + 1, position[1]]} receiveShadow={true}>
-              <sphereGeometry args={[5, 32, 16]}/>
-              <meshStandardMaterial color={0xffff00}/>
-            </mesh> */}
         </>
   );
 }
