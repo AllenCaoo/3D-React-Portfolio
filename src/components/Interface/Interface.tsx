@@ -6,6 +6,8 @@ import { useState, useEffect } from 'react';
 import useViewportMode from '../../hooks/useViewportMode';
 import CameraRig from './CameraRig';
 import ViewportDebug from './ViewportDebug';
+import BookContentOverlay from '../Bookshelf/BookContentOverlay';
+import type { BookProject } from '../../config/books';
 
 const Interface = () => {
   const [inLibraryView, setIsLibraryView] = useState(() => {
@@ -14,6 +16,11 @@ const Interface = () => {
   });
   const { cameraState, profile, viewportMode } = useViewportMode(inLibraryView);
   const [cameraPosition, setCameraPosition] = useState('0.0, 0.0, 0.0');
+  const [readingProject, setReadingProject] = useState<BookProject | null>(null);
+
+  const closeContent = () => {
+    setReadingProject(null);
+  };
 
   useEffect(() => {
     const url = new URL(window.location.href);
@@ -74,8 +81,13 @@ const Interface = () => {
           inLibraryView={inLibraryView}
           controlsProfile={profile.controls}
           setLibraryView={setIsLibraryView}
+          onContentReady={setReadingProject}
+          isContentOpen={readingProject !== null}
         />
       </Canvas>
+      {readingProject && (
+        <BookContentOverlay project={readingProject} onClose={closeContent} />
+      )}
     </>
   );
 }

@@ -1,10 +1,9 @@
-import { Html } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { useRef } from 'react';
 import { Group, MathUtils, Vector3 } from 'three';
 
 interface OpenBookProps {
-  onClose: () => void;
+  onAnimationComplete?: () => void;
 }
 
 const CLOSED_POSITION = new Vector3(-4.12, -1.48, 0.04);
@@ -20,9 +19,10 @@ const SPINE_WIDTH = 0.16;
 const CLOSED_SCALE = 1;
 const OPEN_SCALE = 1.9;
 
-const OpenBook = ({ onClose }: OpenBookProps) => {
+const OpenBook = ({ onAnimationComplete }: OpenBookProps) => {
   const groupRef = useRef<Group | null>(null);
   const progressRef = useRef(0);
+  const completeFiredRef = useRef(false);
 
   useFrame((_, delta) => {
     if (!groupRef.current) {
@@ -51,6 +51,11 @@ const OpenBook = ({ onClose }: OpenBookProps) => {
 
     if (rightCover) {
       rightCover.rotation.y = -spread;
+    }
+
+    if (progressRef.current >= 1 && !completeFiredRef.current) {
+      completeFiredRef.current = true;
+      onAnimationComplete?.();
     }
   });
 
@@ -83,11 +88,6 @@ const OpenBook = ({ onClose }: OpenBookProps) => {
         </mesh>
       </group>
 
-      <Html position={[0, -1.95, 0.5]} transform>
-        <button className="bookshelf-actionButton bookReaderClose" onClick={onClose}>
-          Close Book
-        </button>
-      </Html>
     </group>
   );
 };
