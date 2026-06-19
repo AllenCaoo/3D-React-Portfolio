@@ -8,49 +8,54 @@ interface BookContentOverlayProps {
 
 const BookContentOverlay = ({ project, onClose }: BookContentOverlayProps) => {
   return (
-    <div className="bookContentOverlay" onClick={onClose}>
-      <div className="bookContentPanel" onClick={(e) => e.stopPropagation()}>
-        <button className="bookContentClose" onClick={onClose} aria-label="Close">
-          &#x2715;
-        </button>
+    <div className="bookContentOverlay">
+      <div className="bookContentSpine" />
+      <button className="bookContentClose" onClick={onClose} aria-label="Close">
+        &#x2715;
+      </button>
 
-        <h1 className="bookContentTitle">{project.title}</h1>
-        <p className="bookContentSubtitle">{project.subtitle}</p>
-        <p className="bookContentDescription">{project.description}</p>
+      <div className="bookContentPages">
+        <div className="bookContentPage">
+          <h1 className="bookContentTitle">{project.title}</h1>
+          <p className="bookContentSubtitle">{project.subtitle}</p>
+          <p className="bookContentDescription">{project.description}</p>
 
-        <div className="bookContentSection">
-          <h2 className="bookContentSectionTitle">Tech Stack</h2>
-          <ul className="bookContentTechStack">
-            {project.techStack.map((tech) => (
-              <li key={tech} className="bookContentTechTag">{tech}</li>
-            ))}
-          </ul>
+          {project.links.length > 0 && (
+            <div className="bookContentLinks">
+              {project.links.map((link) => (
+                <a
+                  key={link.url}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bookContentLink"
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          )}
         </div>
 
-        <div className="bookContentSection">
-          <h2 className="bookContentSectionTitle">Features</h2>
-          <ul className="bookContentFeatures">
-            {project.features.map((feature) => (
-              <li key={feature}>{feature}</li>
-            ))}
-          </ul>
-        </div>
-
-        {project.links.length > 0 && (
-          <div className="bookContentLinks">
-            {project.links.map((link) => (
-              <a
-                key={link.url}
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bookContentLink"
-              >
-                {link.label}
-              </a>
-            ))}
+        <div className="bookContentPage">
+          <div className="bookContentSection">
+            <h2 className="bookContentSectionTitle">Tech Stack</h2>
+            <ul className="bookContentTechStack">
+              {project.techStack.map((tech) => (
+                <li key={tech} className="bookContentTechTag">{tech}</li>
+              ))}
+            </ul>
           </div>
-        )}
+
+          <div className="bookContentSection">
+            <h2 className="bookContentSectionTitle">Features</h2>
+            <ul className="bookContentFeatures">
+              {project.features.map((feature) => (
+                <li key={feature}>{feature}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   );
