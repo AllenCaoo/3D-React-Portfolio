@@ -1,26 +1,31 @@
 import '../../index.css'
 import Books from './Books';
 import { useTexture, Html } from '@react-three/drei';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import OpenBook from './OpenBook';
+import { getDefaultProject } from '../../config/books';
+import type { BookProject } from '../../config/books';
 
-
-
-/**
- * Returns a bookshelf mesh
- * @param position coordinates of the top shelf of the bookshelf
- * @returns bookshelf mesh
- */
 const Bookshelf = ({
-    position, 
+    position,
     inLibraryView,
-    setLibraryView
+    setLibraryView,
+    onContentReady,
+    isContentOpen,
 }: {
     position: [number, number, number];
     inLibraryView: boolean;
     setLibraryView: (value: boolean) => void;
+    onContentReady: (project: BookProject) => void;
+    isContentOpen: boolean;
 }) => {
   const [isReading, setIsReading] = useState(false);
+
+  useEffect(() => {
+    if (!isContentOpen) {
+      setIsReading(false);
+    }
+  }, [isContentOpen]);
 
   const bookshelfTexture = useTexture({map: 'textures/bookshelf.png'})
 
@@ -42,7 +47,11 @@ const Bookshelf = ({
                   </div>
                 </Html>
               )}
-              {isReading && <OpenBook onClose={() => setIsReading(false)} />}
+              {isReading && (
+                <OpenBook
+                  onAnimationComplete={() => onContentReady(getDefaultProject())}
+                />
+              )}
               <mesh castShadow receiveShadow>
                 <boxGeometry args={[10, 0.1, 1.8]}/>
                 <meshStandardMaterial {...bookshelfTexture} roughness={0.88} metalness={0.04}/>
